@@ -22,6 +22,9 @@ public class Persona {
     @Column (name = "CorreoElectronico")
     private String correo;
 
+    public Persona() {
+    }
+    
     public Persona(Long id, String nombre, String apellido, String correo) {
         this.id = id;
         this.nombre = nombre;
