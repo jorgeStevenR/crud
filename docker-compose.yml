@@ -1,0 +1,15 @@
+services:
+  app_crud:
+    build:
+      context: ./crud
+      dockerfile: Dockerfile
+    container_name: app_crud
+    mem_limit: 512m
+    ports:
+      - "8080:8080"
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:postgresql://aws-0-us-east-1.pooler.supabase.com:5432/postgres
+      SPRING_DATASOURCE_USERNAME: postgres.hntijpozewihnnrlocwg
+      SPRING_DATASOURCE_PASSWORD: ^ma5psD45e#mz(c
+      SPRING_JPA_HIBERNATE_DDL_AUTO: none
+    restart: unless-stopped
