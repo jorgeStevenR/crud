@@ -26,7 +26,7 @@ public class PersonaController {
     private PersonaServices personaServices;
     
     @PostMapping("/guardar")                                                                                                            // @PostMapping("/guardar") Define un endpoint HTTP POST en la ruta /guardar. , Esto quiere decir que cuando hagas un POST a http://localhost:puerto/api/persona/guardar, se ejecutará este método.
-    private ResponseEntity<Persona> guardar(@RequestBody Persona persona){                                                              // El método devuelve un objeto ResponseEntity<Persona>, que es una forma de responder con estado HTTP y contenido personalizado. ,  @RequestBody Persona persona Spring convierte automáticamente el JSON del cuerpo de la petición en una instancia de la clase Persona.
+    public ResponseEntity<Persona> guardar(@RequestBody Persona persona){                                                              // El método devuelve un objeto ResponseEntity<Persona>, que es una forma de responder con estado HTTP y contenido personalizado. ,  @RequestBody Persona persona Spring convierte automáticamente el JSON del cuerpo de la petición en una instancia de la clase Persona.
         Persona personaTemportal = personaServices.createPersona(persona);                                                              //  Llama al método createPersona() del servicio y guarda el resultado (una Persona guardada en la base de datos) en la variable personaTemportal.
         try{                                                                    
             return ResponseEntity.created(new URI("/api/persona/guardar" + personaTemportal.getId())).body(personaTemportal);           //ResponseEntity.created(...) Devuelve un estado HTTP 201 Created, indicando que el recurso fue creado con éxito. , new URI("/api/persona/guardar" + personaTemportal.getId()) Crea una URI de referencia para el nuevo recurso creado, por ejemplo: /api/persona/guardar5 si el ID es 5. Esto es una buena práctica REST para indicar dónde se puede acceder al nuevo recurso. , .body(personaTemportal) El cuerpo de la respuesta será el objeto personaTemportal, ya guardado en la base de datos.
@@ -36,18 +36,18 @@ public class PersonaController {
     }
 
     @GetMapping("/ListaDePersonas") // Muestra la lista de Personas
-    private ResponseEntity<List<Persona>> listarTodasLasPersonas(){
+    public ResponseEntity<List<Persona>> listarTodasLasPersonas(){
         return ResponseEntity.ok(personaServices.getAllPersonas());
     }
 
     @DeleteMapping // Elilima una persona
-    private ResponseEntity<Void> eliminarPersonas(@RequestBody Persona persona){
+    public ResponseEntity<Void> eliminarPersonas(@RequestBody Persona persona){
         personaServices.delete(persona);
         return ResponseEntity.ok().build();
     }
 
     @GetMapping(value = "/{id}")
-    private ResponseEntity<Optional<Persona>> ListarPersonasPorId(@PathVariable("id") long id){
+    public ResponseEntity<Optional<Persona>> ListarPersonasPorId(@PathVariable("id") long id){
         return ResponseEntity.ok(personaServices.findById(id));
         
     }
