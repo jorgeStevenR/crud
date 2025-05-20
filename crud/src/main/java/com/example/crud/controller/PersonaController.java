@@ -40,10 +40,10 @@ public class PersonaController {
         return ResponseEntity.ok(personaServices.getAllPersonas());
     }
 
-    @DeleteMapping // Elilima una persona
-    public ResponseEntity<Void> eliminarPersonas(@RequestBody Persona persona){
-        personaServices.delete(persona);
-        return ResponseEntity.ok().build();
+    @DeleteMapping("/eliminarPersona/{id}") // Elilima una persona
+    public ResponseEntity<String> eliminarPersonas(@PathVariable Long id){
+        personaServices.deleteById(id);
+        return ResponseEntity.ok("Usuario con id " + id + " se ha eliminado.");
     }
 
     @GetMapping(value = "/{id}")

@@ -23,8 +23,8 @@ public class PersonaServices {
         return personaRepository.findAll(); //Llama al método findAll() del repositorio personaRepository (que extiende de JpaRepository o CrudRepository) y devuelve una lista con todos los registros de la tabla persona en la base de datos.
     }
 
-    public void  delete(Persona persona){
-         personaRepository.delete(persona); //Este método elimina de la base de datos la entidad Persona que se pasa como parámetro, usando el método delete() del personaRepository.
+    public void  deleteById(long id){
+         personaRepository.deleteById(id); //Este método elimina de la base de datos la entidad Persona que se pasa como parámetro, usando el método delete() del personaRepository.
     }
 
     public Optional<Persona> findById(Long id){
