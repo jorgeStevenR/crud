@@ -6,7 +6,6 @@ import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
-import org.springframework.http.HttpStatusCode;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -44,14 +43,13 @@ public class PersonaController {
     @DeleteMapping("/eliminarPersona/{id}") // Elilima una persona
     public ResponseEntity<String> eliminarPersonas(@PathVariable Long id){
         Optional<Persona> personaOptional = personaServices.findById(id);
-
         if(personaOptional.isEmpty()){
             return ResponseEntity.status(HttpStatus.NOT_FOUND)
                     .body("la persona con id " + id + " no existe ");
         }
 
         personaServices.deletePersona(personaOptional.get());
-        return ResponseEntity.ok("Usuario con id " + id + " se ha eliminado.");
+            return ResponseEntity.ok("Usuario con id " + id + " se ha eliminado.");
     }
 
     @GetMapping(value = "/{id}")
