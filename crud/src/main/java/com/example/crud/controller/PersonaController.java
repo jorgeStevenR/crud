@@ -69,9 +69,18 @@ public class PersonaController {
 
         Persona personaExistente = personaOptional.get();
 
-        personaExistente.setNombre(personaActualizada.getNombre());
-        personaExistente.setApellido(personaActualizada.getApellido());
-        personaExistente.setCorreo(personaActualizada.getCorreo());
+        if(personaActualizada.getNombre() != null){
+            personaExistente.setNombre(personaActualizada.getNombre());
+        }
+        
+        if(personaActualizada.getApellido() != null){
+            personaExistente.setApellido(personaActualizada.getApellido());
+        }
+
+        if(personaActualizada.getCorreo() != null){
+            personaExistente.setCorreo(personaActualizada.getCorreo());
+        }
+          
 
         Persona personaGuardada = personaServices.createPersona(personaExistente);
         return ResponseEntity.ok(personaGuardada);
