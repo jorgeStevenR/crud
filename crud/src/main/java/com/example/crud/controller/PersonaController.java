@@ -22,7 +22,7 @@ import com.example.crud.services.PersonaServices;
 
 @RestController
 @RequestMapping("/api/persona")
-@CrossOrigin(origins = {"https://front-iczpc5gef-jorges-projects-702ef7e1.vercel.app", "http://localhost:4200"})
+@CrossOrigin(origins = {"https://front-iczpc5gef-jorges-projects-702ef7e1.vercel.app", "https://frontcrud-g54e.onrender.com", "http://localhost:4200"})
 public class PersonaController {
     @Autowired // Spring inyecta automáticamente una instancia de PersonaServices,
     private PersonaServices personaServices;
