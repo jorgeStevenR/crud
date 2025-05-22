@@ -10,31 +10,27 @@ import jakarta.persistence.Table;
 @Entity
 @Table(name = "persona")
 public class Persona {
-
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY) // Cambio aquí
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
-    @Column(name = "Nombre")
+    @Column (name = "Nombre")
     private String nombre;
-
-    @Column(name = "Apellido")
+    @Column (name = "Apellido")
     private String apellido;
-
-    @Column(name = "CorreoElectronico")
+    @Column (name = "CorreoElectronico")
     private String correo;
 
     public Persona() {
     }
-
+    
     public Persona(Long id, String nombre, String apellido, String correo) {
         this.id = id;
         this.nombre = nombre;
         this.apellido = apellido;
         this.correo = correo;
-    }
-
-    // Getters y Setters
+    }    
+    
     public Long getId() {
         return id;
     }
