@@ -59,7 +59,7 @@
 			<artifactId>flying-saucer-pdf</artifactId>
 			<version>9.1.22</version>
 		</dependency>
-
+		
 		<!-- Envío de emails -->
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
