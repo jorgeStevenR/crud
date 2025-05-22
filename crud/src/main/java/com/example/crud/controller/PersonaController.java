@@ -15,9 +15,11 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.example.crud.model.Persona;
+import com.example.crud.services.EmailService;
 import com.example.crud.services.PersonaServices;
 
 @RestController
@@ -26,6 +28,8 @@ import com.example.crud.services.PersonaServices;
 public class PersonaController {
     @Autowired // Spring inyecta automáticamente una instancia de PersonaServices,
     private PersonaServices personaServices;
+    @Autowired
+    private EmailService emailService;
     
     @PostMapping("/guardar")                                                                                                            // @PostMapping("/guardar") Define un endpoint HTTP POST en la ruta /guardar. , Esto quiere decir que cuando hagas un POST a http://localhost:puerto/api/persona/guardar, se ejecutará este método.
     public ResponseEntity<Persona> guardar(@RequestBody Persona persona){                                                              // El método devuelve un objeto ResponseEntity<Persona>, que es una forma de responder con estado HTTP y contenido personalizado. ,  @RequestBody Persona persona Spring convierte automáticamente el JSON del cuerpo de la petición en una instancia de la clase Persona.
@@ -86,5 +90,23 @@ public class PersonaController {
         Persona personaGuardada = personaServices.createPersona(personaExistente);
         return ResponseEntity.ok(personaGuardada);
     }
+
+            @PostMapping("/generar-pdf/{id}/enviar-email")
+            public ResponseEntity<String> generarPdfYEnviarEmail(
+                    @PathVariable Long id,
+                    @RequestParam String correoDestino) {
+                
+                try {
+                    emailService.enviarPdfPorEmail(id, correoDestino);
+                    return ResponseEntity.ok("PDF generado y enviado a " + correoDestino);
+                } catch (RuntimeException e) {
+                    return ResponseEntity.status(HttpStatus.NOT_FOUND).body(e.getMessage());
+                } catch (Exception e) {
+                    return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
+                            .body("Error al enviar el email: " + e.getMessage());
+                }
+        }
+
+
 
 }
