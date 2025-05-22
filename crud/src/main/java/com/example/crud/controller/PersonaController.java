@@ -24,13 +24,13 @@ import com.example.crud.services.PersonaServices;
 
 @RestController
 @RequestMapping("/api/persona")
-@CrossOrigin(origins = {"https://front-coral-nu.vercel.app","http://localhost:4200"})
+@CrossOrigin(origins = {"https://basededatosfront.vercel.app","http://localhost:4200"})
 public class PersonaController {
     @Autowired // Spring inyecta automáticamente una instancia de PersonaServices,
     private PersonaServices personaServices;
     @Autowired
     private EmailService emailService;
-    
+
     @PostMapping("/guardar")                                                                                                            // @PostMapping("/guardar") Define un endpoint HTTP POST en la ruta /guardar. , Esto quiere decir que cuando hagas un POST a http://localhost:puerto/api/persona/guardar, se ejecutará este método.
     public ResponseEntity<Persona> guardar(@RequestBody Persona persona){                                                              // El método devuelve un objeto ResponseEntity<Persona>, que es una forma de responder con estado HTTP y contenido personalizado. ,  @RequestBody Persona persona Spring convierte automáticamente el JSON del cuerpo de la petición en una instancia de la clase Persona.
         Persona personaTemportal = personaServices.createPersona(persona);                                                              //  Llama al método createPersona() del servicio y guarda el resultado (una Persona guardada en la base de datos) en la variable personaTemportal.
